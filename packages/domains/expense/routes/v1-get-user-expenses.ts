@@ -6,7 +6,7 @@ import { to } from '@nc/utils/async';
 
 export const router = Router();
 
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId/expenses', async (req, res, next) => {
   const [userError, userDetails] = await to(getUserExpenses(req.query?.userId));
 
   if (userError) {
