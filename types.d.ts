@@ -17,6 +17,9 @@ interface ConfigDefinition {
     shutdown: {
         appKill: number
         serverClose: number
+    },
+    auth: {
+        jwtSecret: string
     }
 }
 
