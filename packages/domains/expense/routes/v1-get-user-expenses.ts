@@ -1,5 +1,5 @@
 import { ApiError } from '@nc/utils/errors';
-import { getUserDetails } from '../model';
+import { getUserExpenses } from '../model';
 import { Router } from 'express';
 import { secureTrim } from '../formatter';
 import { to } from '@nc/utils/async';
@@ -7,12 +7,10 @@ import { to } from '@nc/utils/async';
 export const router = Router();
 
 router.get('/:userId', async (req, res, next) => {
-  console.log('Entering user details route...')
-  //TODO: sanitize input
-  const [userError, userDetails] = await to(getUserDetails(req.params.userId));
+  const [userError, userDetails] = await to(getUserExpenses(req.query?.userId));
 
   if (userError) {
-    return next(new ApiError(userError, userError.status, `Could not get user details: ${userError}`, userError.title, req));
+    return next(ApiError(userError, userError.status, `Could not get user details: ${userError}`, userError.title, req));
   }
 
   if (!userDetails) {

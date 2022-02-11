@@ -1,4 +1,4 @@
-import { format } from './userFormatter';
+import { format } from './formatter';
 import { readUser } from './data/db-user';
 import { to } from '@nc/utils/async';
 import { User } from './types';

@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import Logger from '@nc/utils/logging';
 import security from './middleware/security';
 import { router as userRoutes } from '@nc/domain-user';
+import { router as expenseRoutes } from '@nc/domain-expense';
 import { createServer as createHTTPServer, Server } from 'http';
 import { createServer as createHTTPSServer, Server as SecureServer } from 'https';
 
@@ -14,7 +15,6 @@ const app = express();
 const server: Server | SecureServer = (config.https.enabled === true) ? createHTTPSServer(config.https, app as any) : createHTTPServer(app as any);
 var ready: boolean = false;
 
-console.log(config);
 gracefulShutdown(server);
 
 app.use(helmet());
@@ -31,8 +31,9 @@ app.use(context);
 app.use(security);
 
 app.use('/user', userRoutes);
+app.use('/expense', expenseRoutes)
 
-app.use(function(err, res, next) {
+app.use(function(err, req, res, next) {
   res.status(500).json(err);
 });
 
