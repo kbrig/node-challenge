@@ -23,6 +23,14 @@ interface ConfigDefinition {
     }
 }
 
+export interface User {
+    id: string
+    first_name: string
+    last_name: string
+    company_name: string
+    ssn: string
+}
+
 declare module 'config' {
     const config: ConfigDefinition; // eslint-disable-line vars-on-top
     export default config;

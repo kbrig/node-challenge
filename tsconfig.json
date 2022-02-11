@@ -20,7 +20,8 @@
     "index.js",
     "types.d.ts",
     "packages/**/*.ts",
-    "test/**/*.ts"
+    "test/**/*.ts",
+    "test/**/**/*.ts"
   ]
 }
   

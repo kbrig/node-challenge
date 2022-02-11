@@ -67,6 +67,7 @@ Happy hacking 😁!
 ###     4. Prioritize implementation
 ###     5. Implement tests and code progressively, from red to green.
 ###     6. Verify current test coverage and plan to expand if needed.
+###     7. Refactor formatter logic (both tests and consumption)
 
 # Extras
 ##   Build web dashboard to view data in dev environment
