@@ -1,6 +1,6 @@
 import config from 'config';
 import context from './middleware/context';
-import express from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import gracefulShutdown from '@nc/utils/graceful-shutdown';
 import helmet from 'helmet';
 import Logger from '@nc/utils/logging';
@@ -11,19 +11,19 @@ import { createServer as createHTTPServer, Server } from 'http';
 import { createServer as createHTTPSServer, Server as SecureServer } from 'https';
 
 const logger = Logger('server');
-const app = express();
+const app: Application = express();
 const server: Server | SecureServer = (config.https.enabled === true) ? createHTTPSServer(config.https, app as any) : createHTTPServer(app as any);
 var ready: boolean = false;
 
 gracefulShutdown(server);
 
 app.use(helmet());
-app.get('/readycheck', function readinessEndpoint(req, res) {
-  const status = ready ? 200 : 503;
+app.get('/readycheck', function readinessEndpoint(req: Request, res: Response) {
+  const status: number = ready ? 200 : 503;
   res.status(status).send(status === 200 ? 'OK' : 'NOT OK');
 });
 
-app.get('/healthcheck', function healthcheckEndpoint(req, res) {
+app.get('/healthcheck', function healthcheckEndpoint(req: Request, res: Response) {
   res.status(200).send('OK');
 });
 
@@ -33,7 +33,7 @@ app.use(security);
 app.use('/user', userRoutes);
 app.use('/user', expenseRoutes);
 
-app.use(function(err, req, res, next) {
+app.use(function(err, req: Request, res: Response, next: NextFunction) {
   res.status(500).json(err);
 });
 
