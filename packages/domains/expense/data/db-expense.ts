@@ -3,7 +3,7 @@ import Logger from '@nc/utils/logging';
 
 const logger = Logger("Expense-DB");
 
-export function readUserExpenses(userId: string, page: number, pageSize: number, orderByIndex: number, orderByAscending: boolean, filter: string = '') {
+export function readUserExpenses(userId: string, page: number, pageSize: number, orderByIndex: number, orderByAscending: boolean, filter: string) {
   let q: string;
   const p: any[] = [];
 
@@ -13,13 +13,13 @@ SELECT *
 FROM expenses 
 WHERE 
   user_id = $1 
-  AND merchant_name LIKE '%$2%' 
+  AND merchant_name LIKE $2 
 ORDER BY 
   $3 ${orderByAscending ? 'ASC' : 'DESC'} 
 LIMIT ${pageSize} 
 OFFSET ${(page - 1) * pageSize}
 `;
-    p.push(userId, filter, orderByIndex);
+    p.push(userId, `%${filter}%`, orderByIndex);
   } else {
     q = `
 SELECT * 

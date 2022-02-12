@@ -27,16 +27,22 @@ const handleQueryParameters = (req) => {
     pageSize: parseInt(req.query.pageSize) || 50,
     orderByIndex: parseInt(req.query.order) || 6, 
     orderByAscending: getBoolean(req.query.asc),
-    filter: req.query.filter
+    filter: req.query.filter || ''
   };
 };
 
-
 router.get('/:userId/expenses/:pageNumber?', async (req, res, next) => {
 
-  let queryParameters = handleQueryParameters(req.query);
+  let queryParameters = handleQueryParameters(req);
 
-  const [expenseError, expensesDetails] = await to(getUserExpenses(req.params.userId, queryParameters.pageNumber, queryParameters.pageSize, queryParameters.orderByIndex, queryParameters.orderByAscending, queryParameters.filter));
+  const [expenseError, expensesDetails] = await to(getUserExpenses(
+    queryParameters.userId, 
+    queryParameters.pageNumber, 
+    queryParameters.pageSize, 
+    queryParameters.orderByIndex, 
+    queryParameters.orderByAscending, 
+    queryParameters.filter
+  ));
 
   if (expenseError) {
     return next(ApiError(expenseError, expenseError.status, `Could not get expenses for user ${req.params.userId}: ${expenseError}`, expenseError.title, req));
