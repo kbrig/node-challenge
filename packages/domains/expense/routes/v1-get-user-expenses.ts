@@ -25,7 +25,7 @@ const handleQueryParameters = (req) => {
     userId: req.params.userId,
     pageNumber: parseInt(req.params.pageNumber) || 1,
     pageSize: parseInt(req.query.pageSize) || 50,
-    orderByIndex: parseInt(req.query.order) || 6, 
+    orderByIndex: parseInt(req.query.order) || 2, 
     orderByAscending: getBoolean(req.query.asc),
     filter: req.query.filter || ''
   };
