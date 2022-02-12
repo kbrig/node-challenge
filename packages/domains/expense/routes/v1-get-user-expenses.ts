@@ -3,19 +3,20 @@ import { getUserExpenses } from '../model';
 import { Router } from 'express';
 import { secureTrim } from '../formatter';
 import { to } from '@nc/utils/async';
+import { Expense } from '../types'
 
 export const router = Router();
 
 router.get('/:userId/expenses', async (req, res, next) => {
-  const [userError, userDetails] = await to(getUserExpenses(req.query?.userId));
+  const [expenseError, expensesDetails] = await to(getUserExpenses(req.params.userId));
 
-  if (userError) {
-    return next(ApiError(userError, userError.status, `Could not get user details: ${userError}`, userError.title, req));
+  if (expenseError) {
+    return next(ApiError(expenseError, expenseError.status, `Could not get expenses for user ${req.params.userId}: ${expenseError}`, expenseError.title, req));
   }
 
-  if (!userDetails) {
+  if (!expensesDetails) {
     return res.json({});
   }
 
-  return res.json(secureTrim(userDetails));
+  return res.json(secureTrim(expensesDetails));
 });

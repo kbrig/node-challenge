@@ -31,7 +31,7 @@ app.use(context);
 app.use(security);
 
 app.use('/user', userRoutes);
-app.use('/user', expenseRoutes)
+app.use('/user', expenseRoutes);
 
 app.use(function(err, req, res, next) {
   res.status(500).json(err);

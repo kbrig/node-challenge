@@ -8,8 +8,8 @@ export function capitalize(word) {
   return str[0].toUpperCase() + str.slice(1);
 }
 
-export function secureTrim(expense: Expense): string {
-  return JSON.stringify(expense, publicFields);
+export function secureTrim(expenses: Expense[]) : string {
+  return JSON.stringify(expenses, publicFields);
 }
 
 export function format(rawExpense): Expense {
