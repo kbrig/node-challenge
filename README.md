@@ -56,18 +56,3 @@ The command above will run the following test suites sequentially:
 
 
 Happy hacking 😁!
-
-
-
-# DEV NOTES
-## TDD -> 
-###       1. Have the current tests pass
-###     2. Analyse solution and requirements
-###     3. (re)Design solution
-###     4. Prioritize implementation
-###     5. Implement tests and code progressively, from red to green.
-###     6. Verify current test coverage and plan to expand if needed.
-###     7. Refactor formatter logic (both tests and consumption)
-
-# Extras
-##   Build web dashboard to view data in dev environment

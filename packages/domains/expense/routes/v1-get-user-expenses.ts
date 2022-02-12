@@ -8,6 +8,9 @@ import { Expense } from '../types'
 export const router = Router();
 
 router.get('/:userId/expenses', async (req, res, next) => {
+
+  //TODO: PAGING, SORTING, FILTERING
+
   const [expenseError, expensesDetails] = await to(getUserExpenses(req.params.userId));
 
   if (expenseError) {

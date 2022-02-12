@@ -563,6 +563,9 @@
 "@nc/domain-expense@file:/Users/kbrigant/Projects/node-challenge/packages/domains/expense":
   "resolved" "file:packages/domains/expense"
   "version" "0.0.0"
+  dependencies:
+    "@nc/utils" "^0.0.0"
+    "express" "^4.17.0"
 
 "@nc/domain-user@file:/Users/kbrigant/Projects/node-challenge/packages/domains/user":
   "resolved" "file:packages/domains/user"
@@ -790,6 +793,15 @@
   "integrity" "sha512-KDazLNYAGIuJugdbULwFZULF9qQ13yNWEBFnfVpqlpgAAo6H/qnM9RjBgh0A0kmHf3XxAKLdN5mTIng9iUvVLA=="
   "resolved" "https://registry.npmjs.org/@types/node/-/node-16.9.4.tgz"
   "version" "16.9.4"
+
+"@types/pg@^8.6.4":
+  "integrity" "sha512-uYA7UMVzDFpJobCrqwW/iWkFmvizy6knIUgr0Quaw7K1Le3ZnF7hI3bKqFoxPZ+fju1Sc7zdTvOl9YfFZPcmeA=="
+  "resolved" "https://registry.npmjs.org/@types/pg/-/pg-8.6.4.tgz"
+  "version" "8.6.4"
+  dependencies:
+    "@types/node" "*"
+    "pg-protocol" "*"
+    "pg-types" "^2.2.0"
 
 "@types/prettier@^2.1.5":
   "integrity" "sha512-eI5Yrz3Qv4KPUa/nSIAi0h+qX0XyewOliug5F2QAtuRg6Kjg6jfmxe1GIwoIRhZspD1A0RP8ANrPwvEXXtRFog=="
@@ -3865,12 +3877,12 @@
   "resolved" "https://registry.npmjs.org/pg-pool/-/pg-pool-3.4.1.tgz"
   "version" "3.4.1"
 
-"pg-protocol@^1.5.0":
+"pg-protocol@*", "pg-protocol@^1.5.0":
   "integrity" "sha512-muRttij7H8TqRNu/DxrAJQITO4Ac7RmX3Klyr/9mJEOBeIpgnF8f9jAfRz5d3XwQZl5qBjF9gLsUtMPJE0vezQ=="
   "resolved" "https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.5.0.tgz"
   "version" "1.5.0"
 
-"pg-types@^2.1.0":
+"pg-types@^2.1.0", "pg-types@^2.2.0":
   "integrity" "sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA=="
   "resolved" "https://registry.npmjs.org/pg-types/-/pg-types-2.2.0.tgz"
   "version" "2.2.0"
