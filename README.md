@@ -61,10 +61,18 @@ Happy hacking 😁!
 
 # DEV NOTES
 
-The solution has been extended successfully, offering now an API allowing to list out paginated, sorteable and filterable expenses.
+The solution has been extended successfully, offering now an API allowing to list out paginated, sorteable and filterable expenses. There is some level of monitoring now thanks to the monitor express-status-monitor which can be tuned to our evolving needs.
 
 Most components of this solution have been put into classes in order to follow a more Object-Oriented feel and incorporate Inversion of Control whilst keeping the packages architecture. Doing this allowed easy mocking of our DB access in order to test only our logic and not the DB alongside.
 
+Helmet and security.ts offer sufficient security at this point based on the features of the API at this stage.
 
-
-The change might be convoluted and a more "nodejs/typescript" approach might exist and be preferable here and worth 
+Things I would like to improve upon:
+- The change into so many classes might be convoluted and a more "nodejs/typescript" approach might exist and be preferable here.
+- Add endpoint monitoring
+- Add database access monitoring (around the driver so we can be DB agnostic)
+- Research the security vulnerabilities for the modules used in order to improve overall solution's security
+- Research whether it is necessary to have the 'index.js' step to set those global variables in order to switch to a full typescript solution
+- Secure the dashboard behind password (with JWT based auth/HTTPS)
+- Add admin dashboard
+    - Browse all data (users, their expenses, expenses by merchant)
