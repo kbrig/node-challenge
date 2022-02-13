@@ -6,7 +6,7 @@ export class MockDBDriver implements IRepositoryDriver {
         this.returnData = returnData;
     }
 
-    query(queryString: string, parameters?: any) {
+    async query(queryString: string, parameters?: any): Promise<any> {
         return { rows: this.returnData };
     }
 }

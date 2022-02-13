@@ -20,6 +20,10 @@ interface ConfigDefinition {
     },
     auth: {
         jwtSecret: string
+    },
+    api_version: {
+        user: number,
+        expense: number
     }
 }
 

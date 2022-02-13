@@ -17,7 +17,7 @@ describe('Given that we have a healthy service', () => {
     describe('Given the user exists', () => {
       it('should return the user in JSON along with a HTTP 200', async () => {
         const userId = 'da140a29-ae80-4f0e-a62d-6c2d2bc8a474';
-        userMockDriver.setReturnData(makeUser('da140a29-ae80-4f0e-a62d-6c2d2bc8a474', 'jeppe', 'rindom', 'pleo', '1'));
+        userMockDriver.setReturnData([makeUser('da140a29-ae80-4f0e-a62d-6c2d2bc8a474', 'jeppe', 'rindom', 'pleo', '1')]);
         await Api.get(`/user/v1/${userId}`).expect(200);
       });
     });

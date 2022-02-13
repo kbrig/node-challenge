@@ -19,8 +19,7 @@ export class ExpenseController {
     if (!userId) {
       throw BadRequest('userId property is missing.');
     }
-  
-    console.log(this.repository);
+    
     const [dbError, rawExpenses] = await to(this.repository.readUserExpenses(userId, pageNumber, pageSize, orderByIndex, orderByAscending, filter));
   
     if (dbError) {

@@ -28,8 +28,8 @@ export function createServer(userRepository: IUserRepository, expenseRepository:
   app.use(context);
   app.use(security);
   
-  app.use('/user', createUserRouter(userRepository).getRouter());
-  app.use('/user', createExpenseRouter(expenseRepository).getRouter());
+  app.use('/user', createUserRouter(userRepository, config.api_version.user).getRouter());
+  app.use('/user', createExpenseRouter(expenseRepository, config.api_version.expense).getRouter());
 
   app.use(function(err, req: Request, res: Response, next: NextFunction) {
     res.status(500).json(err);

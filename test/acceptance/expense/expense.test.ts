@@ -16,7 +16,7 @@ describe('Given that we have a healthy service', () => {
             it('should return an empty list of expenses for that user in JSON along with a HTTP 200', async () => {
                 const userId = 'da140a29-ae80-4f0e-a62d-6c2d2bc8a474';
                 expenseMockDriver.setReturnData([]);
-                await Api.get(`/user/v1/${userId}`).expect(200);
+                await Api.get(`/user/v1/${userId}/expenses`).expect(200);
             });
         });
 
@@ -27,8 +27,8 @@ describe('Given that we have a healthy service', () => {
                 let result = await Api.get(`/user/v1/${userId}/expenses`);
 
                 expect(result.status).toBe(200);
-                let items = JSON.parse(result.body);
-                expect(items.Length).toBe(2);
+                let items: [] = JSON.parse(result.body);
+                expect(items.length).toBe(2);
             });
         });
     });

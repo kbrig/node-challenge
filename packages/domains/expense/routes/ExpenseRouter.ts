@@ -13,7 +13,8 @@ export class ExpenseRouter implements IExpenseRouter {
     return this.router;
   }
 
-  private getBoolean(value) {
+  //TODO: There must be a more elegant way...
+  private parseBoolean(value) {
     switch(value){
          case true:
          case "true":
@@ -28,12 +29,13 @@ export class ExpenseRouter implements IExpenseRouter {
   }
 
   private async handlePaginatedGetUserExpenses(req, res, next) {
+    //TODO: Verify parameter sanitization
     let queryParameters = {
       userId: req.params.userId,
       pageNumber: parseInt(req.params.pageNumber) || 1,
       pageSize: parseInt(req.query.pageSize) || 50,
       orderByIndex: parseInt(req.query.order) || 2, 
-      orderByAscending: this.getBoolean(req.query.asc),
+      orderByAscending: this.parseBoolean(req.query.asc),
       filter: req.query.filter || ''
     };
     
@@ -47,7 +49,6 @@ export class ExpenseRouter implements IExpenseRouter {
     ));
   
     if (expenseError) {
-      console.log(expenseError);
       return next(ApiError(expenseError, expenseError.status, `Could not get expenses for user ${req.params.userId}: ${expenseError}`, expenseError.title, req));
     }
   
@@ -59,6 +60,7 @@ export class ExpenseRouter implements IExpenseRouter {
   }
 
   private setupRouter(version: number) {
+    //Seting up a subrouter that will be prefixed by the API version number.
     let subrouter = Router();
     subrouter.get('/:userId/expenses/:pageNumber?', async (req, res, next) => { return await this.handlePaginatedGetUserExpenses(req, res, next); });
 

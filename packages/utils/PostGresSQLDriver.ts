@@ -10,10 +10,8 @@ export class PostGresSQLDriver implements IRepositoryDriver {
     return this.db.connect();
   }
 
-  async query(queryString: string, parameters?: any) {
+  async query(queryString: string, parameters?: any): Promise<any> {
     if (!this.db) await this.connect();
-
-    console.warn(`Querying DB with:\n${queryString}\n${parameters}`);
 
     return this.db.query(queryString, parameters);
   }

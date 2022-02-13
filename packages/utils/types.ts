@@ -1,3 +1,3 @@
 export interface IRepositoryDriver {
-    query(queryString: string, parameters?: any);
+    query(queryString: string, parameters?: any): Promise<any>;
 }

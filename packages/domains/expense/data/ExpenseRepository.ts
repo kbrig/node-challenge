@@ -25,6 +25,6 @@ OFFSET ${(page - 1) * pageSize}`;
     if (filter.length > 0) {
       p.push(`%${filter}%`);
     }
-    return this.driver.query(q, p).then((response) => { console.log(response); return response.rows; });
+    return this.driver.query(q, p).then((response) => response.rows);
   }
 }

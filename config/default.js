@@ -25,4 +25,8 @@ module.exports = {
   auth: {
     jwtSecret: 'none'
   },
+  api_version: {
+    user: 1,
+    expense: 1
+  },
 };
