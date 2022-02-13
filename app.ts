@@ -4,7 +4,7 @@ import Logger from '@nc/utils/logging';
 
 import { createServer } from './server';
 import { ExpenseRepository } from '@nc/domain-expense/data/ExpenseRepository';
-import { UserRepository } from '@nc/domain-user/data/db-user'
+import { UserRepository } from '@nc/domain-user/data/UserRepository'
 
 const logger = Logger('server');
 const server = createServer(new UserRepository(), new ExpenseRepository());
