@@ -7,5 +7,4 @@ import { MockDBDriver } from './MockDBDriver';
 export const userMockDriver = new MockDBDriver();
 export const expenseMockDriver = new MockDBDriver();
 
-//TODO: Mock drivers.
 export const Api = agent(createServer(new UserRepository(userMockDriver), new ExpenseRepository(expenseMockDriver)));

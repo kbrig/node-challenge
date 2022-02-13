@@ -9,6 +9,7 @@ import { createServer as createHTTPServer, Server } from 'http';
 import { createServer as createHTTPSServer, Server as SecureServer } from 'https';
 import config from 'config';
 import { IUserRepository } from '@nc/domain-user/types';
+import monitor from 'express-status-monitor'
 
 
 const app: Application = express();
@@ -27,6 +28,7 @@ export function createServer(userRepository: IUserRepository, expenseRepository:
 
   app.use(context);
   app.use(security);
+  app.use(monitor());
   
   app.use('/user', createUserRouter(userRepository, config.api_version.user).getRouter());
   app.use('/user', createExpenseRouter(expenseRepository, config.api_version.expense).getRouter());

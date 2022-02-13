@@ -3,7 +3,6 @@ import { Request, Response, NextFunction, Router } from 'express';
 import { IExpenseController, IExpenseFormatter, IExpenseRouter } from '../types';
 import { to } from '@nc/utils/async';
 
-
 export class ExpenseRouter implements IExpenseRouter {
   private router = Router();
   private controller: IExpenseController;

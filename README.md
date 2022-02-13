@@ -56,3 +56,15 @@ The command above will run the following test suites sequentially:
 
 
 Happy hacking 😁!
+
+
+
+# DEV NOTES
+
+The solution has been extended successfully, offering now an API allowing to list out paginated, sorteable and filterable expenses.
+
+Most components of this solution have been put into classes in order to follow a more Object-Oriented feel and incorporate Inversion of Control whilst keeping the packages architecture. Doing this allowed easy mocking of our DB access in order to test only our logic and not the DB alongside.
+
+
+
+The change might be convoluted and a more "nodejs/typescript" approach might exist and be preferable here and worth 
