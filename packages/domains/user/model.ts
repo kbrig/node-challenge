@@ -1,26 +1,32 @@
-import { format } from './formatter';
-import { readUser } from './data/db-user';
-import { to } from '@nc/utils/async';
-import { User } from './types';
+import { IUserController, IUserFormatter, IUserRepository, User } from './types';
 import { BadRequest, InternalError, NotFound } from '@nc/utils/errors';
+import { to } from '@nc/utils/async';
 
-export async function getUserDetails(userId: string, readUserOverride?: Function): Promise<User> {
-  if (!userId) {
-    throw BadRequest('userId property is missing.');
-  }
-  
-  //TODO: validate ID format to prevent 500s.
 
-  // This should try to run the overrider if it is set.
-  const [dbError, rawUser] = await to(readUserOverride ? readUserOverride(userId) : readUser(userId));
+export class UserController implements IUserController {
+  private repository: IUserRepository;
+  private formatter: IUserFormatter;
 
-  if (dbError) {
-    throw InternalError(`Error fetching data from the DB: ${dbError.message}`);
+  constructor(repository: IUserRepository, formatter: IUserFormatter) {
+    this.repository = repository;
+    this.formatter = formatter;
   }
 
-  if (!rawUser) {
-    throw NotFound(`Could not find user with id ${userId}`);
-  }
+  async getUserDetails(userId: string): Promise<User> {
+    if (!userId) {
+      throw BadRequest('userId property is missing.');
+    }
+    
+    const [dbError, rawUser] = await to(this.repository.readUser(userId));
 
-  return format(rawUser);
+    if (dbError) {
+      throw InternalError(`Error fetching data from the DB: ${dbError.message}`);
+    }
+
+    if (!rawUser) {
+      throw NotFound(`Could not find user with id ${userId}`);
+    }
+
+    return this.formatter.format(rawUser);
+  }
 }

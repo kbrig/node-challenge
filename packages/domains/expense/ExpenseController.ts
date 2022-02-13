@@ -1,5 +1,3 @@
-import { ExpenseFormatter } from './ExpenseFormatter';
-import { ExpenseRepository } from './data/db-expense';
 import { Expense, IExpenseFormatter, IExpenseRepository } from './types';
 import { BadRequest, InternalError, NotFound } from '@nc/utils/errors';
 import { to } from '@nc/utils/async';
@@ -8,7 +6,7 @@ export class ExpenseController {
   private formatter: IExpenseFormatter;
   private repository: IExpenseRepository;
 
-  constructor(formatter: IExpenseFormatter, repository: IExpenseRepository) {
+  constructor(repository: IExpenseRepository, formatter: IExpenseFormatter) {
     this.repository = repository;
     this.formatter = formatter;
   }
@@ -22,6 +20,7 @@ export class ExpenseController {
       throw BadRequest('userId property is missing.');
     }
   
+    console.log(this.repository);
     const [dbError, rawExpenses] = await to(this.repository.readUserExpenses(userId, pageNumber, pageSize, orderByIndex, orderByAscending, filter));
   
     if (dbError) {

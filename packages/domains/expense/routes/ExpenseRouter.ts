@@ -28,9 +28,6 @@ export class ExpenseRouter implements IExpenseRouter {
   }
 
   private async handlePaginatedGetUserExpenses(req, res, next) {
-    console.log(req.params);
-    console.log(req.query);
-
     let queryParameters = {
       userId: req.params.userId,
       pageNumber: parseInt(req.params.pageNumber) || 1,
@@ -50,6 +47,7 @@ export class ExpenseRouter implements IExpenseRouter {
     ));
   
     if (expenseError) {
+      console.log(expenseError);
       return next(ApiError(expenseError, expenseError.status, `Could not get expenses for user ${req.params.userId}: ${expenseError}`, expenseError.title, req));
     }
   
@@ -62,7 +60,7 @@ export class ExpenseRouter implements IExpenseRouter {
 
   private setupRouter(version: number) {
     let subrouter = Router();
-    subrouter.get('/:userId/expenses/:pageNumber?', (req, res, next) => { return this.handlePaginatedGetUserExpenses(req, res, next); });
+    subrouter.get('/:userId/expenses/:pageNumber?', async (req, res, next) => { return await this.handlePaginatedGetUserExpenses(req, res, next); });
 
     this.router.use(`/v${version}`, subrouter);
   }

@@ -1,14 +1,13 @@
 import config from 'config';
-import context from './middleware/context';
-import express, { Application, Request, Response, NextFunction } from 'express';
 import gracefulShutdown from '@nc/utils/graceful-shutdown';
 import Logger from '@nc/utils/logging';
 
 import { createServer } from './server';
 import { ExpenseRepository } from '@nc/domain-expense/data/ExpenseRepository';
+import { UserRepository } from '@nc/domain-user/data/db-user'
 
 const logger = Logger('server');
-const server = createServer(new ExpenseRepository());
+const server = createServer(new UserRepository(), new ExpenseRepository());
 
 gracefulShutdown(server);
 

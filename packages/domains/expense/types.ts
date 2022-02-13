@@ -1,3 +1,5 @@
+import { IBaseFormatter } from "../BaseFormatter";
+
 export interface Expense {
     id: string
     merchant_name: string
@@ -15,10 +17,6 @@ export interface IExpenseRepository {
 export interface IExpenseController {
     setRepository(newRepository: IExpenseRepository);
     getUserExpenses(userId: string, pageNumber: number, pageSize: number, orderByIndex: number, orderByAscending: boolean, filter: string): Promise<Expense[]>;
-}
-
-export interface IBaseFormatter {
-    capitalize(word: string): string;
 }
 
 export interface IExpenseFormatter extends IBaseFormatter {

@@ -1,6 +1,9 @@
-import { Router } from 'express';
-import { router as v1 } from './routes/v1-get-user';
+import { UserFormatter } from './formatter';
+import { UserController } from './model';
+import { UserRouter } from './routes/v1-get-user';
+import { IUserRepository, IUserRouter } from './types';
 
-export const router = Router();
-
-router.use('/v1', v1);
+export function createRouter(repository: IUserRepository, version: number = 1): IUserRouter {
+    const formatter = new UserFormatter();
+    return new UserRouter(new UserController(repository, formatter), formatter, version);
+}
