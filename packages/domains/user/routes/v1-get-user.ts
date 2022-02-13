@@ -3,7 +3,6 @@ import { getUserDetails } from '../model';
 import { Router } from 'express';
 import { secureTrim } from '../formatter';
 import { to } from '@nc/utils/async';
-import { types } from 'pg';
 
 export const router = Router();
 

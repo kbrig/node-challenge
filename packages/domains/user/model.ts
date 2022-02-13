@@ -4,12 +4,13 @@ import { to } from '@nc/utils/async';
 import { User } from './types';
 import { BadRequest, InternalError, NotFound } from '@nc/utils/errors';
 
-export async function getUserDetails(userId): Promise<User> {
+export async function getUserDetails(userId: string, readUserOverride?: Function): Promise<User> {
   if (!userId) {
     throw BadRequest('userId property is missing.');
   }
 
-  const [dbError, rawUser] = await to(readUser(userId));
+  // This should try to run the overrider if it is set.
+  const [dbError, rawUser] = await to(readUserOverride(userId) || readUser(userId));
 
   if (dbError) {
     throw InternalError(`Error fetching data from the DB: ${dbError.message}`);

@@ -1,4 +1,4 @@
-import { capitalize, format, secureTrim } from '../../../packages/domains/user/formatter';
+import { capitalize, format, secureTrim } from '../formatter';
 
 describe('[Packages | User-domain | Formatter] capitalize', () => {
   test('capitalize should make the first character as a capital letter', () => {
