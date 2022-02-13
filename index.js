@@ -15,4 +15,4 @@ require('ts-node')
   // Skip type check to speed up warm time and reduce memory usage
   .register({ transpileOnly: true });
 
-require('./server.ts');
+require('./app.ts');

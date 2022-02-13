@@ -21,7 +21,8 @@
     "test:acceptance": "NODE_ENV=qa jest test/acceptance/* --forceExit --maxWorkers=4",
     "test:coverage": "NODE_ENV=qa jest packages/* --forceExit --maxWorkers=4 --coverage",
     "test:mid-level": "NODE_ENV=qa jest test/mid-level/* --forceExit --maxWorkers=4",
-    "test:unit": "NODE_ENV=qa jest packages/* --forceExit --maxWorkers=4"
+    "test:unit": "NODE_ENV=qa jest packages/* --forceExit --maxWorkers=4",
+    "tests": "yarn test:unit && yarn test:mid-level && yarn test:coverage && yarn test:acceptance"
   },
   "repository": {
     "type": "git",

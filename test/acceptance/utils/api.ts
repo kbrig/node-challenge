@@ -1,4 +1,4 @@
 import { agent } from 'supertest';
-import config from 'config';
+import { createServer } from '../../../server';
 
-export const Api = agent(process.env.API_URL_OVERRIDE || `${config.https?.enabled ? 'https://' : 'http://'}${config.host}`);
+export const Api = agent(createServer());

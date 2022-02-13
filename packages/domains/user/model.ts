@@ -8,9 +8,11 @@ export async function getUserDetails(userId: string, readUserOverride?: Function
   if (!userId) {
     throw BadRequest('userId property is missing.');
   }
+  
+  //TODO: validate ID format to prevent 500s.
 
   // This should try to run the overrider if it is set.
-  const [dbError, rawUser] = await to(readUserOverride(userId) || readUser(userId));
+  const [dbError, rawUser] = await to(readUserOverride ? readUserOverride(userId) : readUser(userId));
 
   if (dbError) {
     throw InternalError(`Error fetching data from the DB: ${dbError.message}`);

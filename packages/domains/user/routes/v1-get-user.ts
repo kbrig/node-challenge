@@ -7,7 +7,6 @@ import { to } from '@nc/utils/async';
 export const router = Router();
 
 router.get('/:userId', async (req, res, next) => {
-  console.log('Entering user details route...')
   const [userError, userDetails] = await to(getUserDetails(req.params.userId));
 
   if (userError) {
@@ -15,7 +14,7 @@ router.get('/:userId', async (req, res, next) => {
   }
 
   if (!userDetails) {
-    return res.json({});
+    return res.status(404).json({});
   }
 
   return res.json(secureTrim(userDetails));
