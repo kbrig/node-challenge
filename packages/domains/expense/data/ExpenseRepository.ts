@@ -1,7 +1,13 @@
-import { query } from '@nc/utils/db';
+import { IRepositoryDriver } from '@nc/utils/types';
 import { IExpenseRepository } from '../types';
 
 export class ExpenseRepository implements IExpenseRepository {
+  private driver: IRepositoryDriver;
+
+  constructor(driver: IRepositoryDriver) {
+    this.driver = driver;
+  }
+
   readUserExpenses(userId: string, page: number, pageSize: number, orderByIndex: number, orderByAscending: boolean, filter: string) {
     const p: (string | number | boolean)[] = [userId, orderByIndex];
     let q: string = `
@@ -19,6 +25,6 @@ OFFSET ${(page - 1) * pageSize}`;
     if (filter.length > 0) {
       p.push(`%${filter}%`);
     }
-    return query(q, p).then((response) => { console.log(response); return response.rows; });
+    return this.driver.query(q, p).then((response) => { console.log(response); return response.rows; });
   }
 }

@@ -1,17 +1,21 @@
 import { Client } from 'pg';
 import config from 'config';
+import { IRepositoryDriver } from './types';
 
-let db;
 
-export function connect() {
-  db = new Client(config.db);
-  return db.connect();
-}
+export class PostGresSQLDriver implements IRepositoryDriver {
+  private db;
+  connect() {
+    this.db = new Client(config.db);
+    return this.db.connect();
+  }
 
-export async function query(queryString: string, parameters?: any) {
-  if (!db) await connect();
+  async query(queryString: string, parameters?: any) {
+    if (!this.db) await this.connect();
 
-  console.log(`Querying DB with:\n${queryString}\n${parameters}`);
+    console.warn(`Querying DB with:\n${queryString}\n${parameters}`);
 
-  return db.query(queryString, parameters);
+    return this.db.query(queryString, parameters);
+  }
+
 }
