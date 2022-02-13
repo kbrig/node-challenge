@@ -1,8 +1,11 @@
+import { Request, Response, NextFunction } from "express";
 import { randomUUID } from 'crypto';
 
-export default function context(req, res, next) {
+export default function context(req: Request, res: Response, next: NextFunction) {
   const requestId = req.headers['x-request-id'] || randomUUID();
-  req.id = requestId;
+
+  //TODO: This is a hack, is there a better way?
+  (req as any).id = requestId;
   res.setHeader('x-request-id', requestId);
 
   next();

@@ -56,7 +56,7 @@ export class ExpenseRouter implements IExpenseRouter {
       return res.json({});
     }
   
-    return res.json(this.formatter.secureTrim(expensesDetails));
+    return res.set('Content-Type', 'application/json').send(this.formatter.secureTrim(expensesDetails));
   }
 
   private setupRouter(version: number) {

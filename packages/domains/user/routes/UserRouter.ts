@@ -22,7 +22,7 @@ export class UserRouter implements IUserRouter {
     if (!userDetails) {
       return res.status(404).json({});
     }
-    return res.json(this.formatter.secureTrim(userDetails));
+    return res.set('Content-Type', 'application/json').send(this.formatter.secureTrim(userDetails));
   }
 
   private setupRouter(version: number) {
