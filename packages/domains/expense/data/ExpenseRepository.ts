@@ -9,15 +9,15 @@ export class ExpenseRepository implements IExpenseRepository {
   }
 
   readUserExpenses(userId: string, page: number, pageSize: number, orderByIndex: number, orderByAscending: boolean, filter: string) {
-    const p: (string | number | boolean)[] = [userId, orderByIndex];
+    const p: (string | number | boolean)[] = [userId];
     let q: string = `
     SELECT * 
     FROM expenses 
     WHERE 
     user_id = $1 
-    ${filter.length > 0 ? 'AND merchant_name LIKE $3' : ''}
+    ${filter.length > 0 ? 'AND merchant_name LIKE $2' : ''}
     ORDER BY 
-    $2 ${orderByAscending ? 'ASC' : 'DESC'},
+    ${orderByIndex} ${orderByAscending ? 'ASC' : 'DESC'},
     date_created DESC
     LIMIT ${pageSize} 
     OFFSET ${(page - 1) * pageSize}`;

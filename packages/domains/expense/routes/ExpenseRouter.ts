@@ -33,7 +33,7 @@ export class ExpenseRouter implements IExpenseRouter {
     let queryParameters = {
       userId: req.params.userId,
       pageNumber: parseInt(req.params.pageNumber) || 1,
-      pageSize: parseInt(req.query.pageSize) || 50,
+      pageSize: parseInt(req.query.ps) || 50,
       orderByIndex: parseInt(req.query.order) || 2, 
       orderByAscending: this.parseBoolean(req.query.asc),
       filter: req.query.filter || ''
