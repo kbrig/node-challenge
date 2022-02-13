@@ -7,3 +7,27 @@ export interface Expense {
     date_created: Date
     status: string
 }
+
+export interface IExpenseRepository {
+    readUserExpenses(userId: string, page: number, pageSize: number, orderByIndex: number, orderByAscending: boolean, filter: string);
+}
+
+export interface IExpenseController {
+    setRepository(newRepository: IExpenseRepository);
+    getUserExpenses(userId: string, pageNumber: number, pageSize: number, orderByIndex: number, orderByAscending: boolean, filter: string): Promise<Expense[]>;
+}
+
+export interface IBaseFormatter {
+    capitalize(word: string): string;
+}
+
+export interface IExpenseFormatter extends IBaseFormatter {
+    capitalize(word: string): string;
+    secureTrim(expenses: Expense[]): string;
+    format(rawExpense): Expense;
+    formatAll(rawExpenses): Expense[];
+}
+
+export interface IExpenseRouter {
+    getRouter();
+ }

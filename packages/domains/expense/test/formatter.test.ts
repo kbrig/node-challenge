@@ -1,27 +1,30 @@
-import { capitalize, format, formatAll, secureTrim } from '../formatter';
+import { ExpenseFormatter } from '../ExpenseFormatter';
 
 describe('[Packages | Expense-domain | Formatter] capitalize', () => {
+  let formatter = new ExpenseFormatter();
+
     test('capitalize should make the first character as a capital letter', () => {
-      return expect(capitalize('mario')).toEqual('Mario');
+      return expect(formatter.capitalize('mario')).toEqual('Mario');
     });
   
     test('capitalize should do nothing on already capitalized word', () => {
-      return expect(capitalize('Mario')).toEqual('Mario');
+      return expect(formatter.capitalize('Mario')).toEqual('Mario');
     });
   
     test('capitalize should do nothing on numbers', () => {
-      return expect(capitalize(123)).toEqual('123');
+      return expect(formatter.capitalize(123)).toEqual('123');
     });
   
     test('capitalize should do nothing on strings of numbers', () => {
-      return expect(capitalize('123')).toEqual('123');
+      return expect(formatter.capitalize('123')).toEqual('123');
     });
   });
 
 
 describe('[Packages | Expense-domain | Formatter] secureTrim', () => {
+  let formatter = new ExpenseFormatter();
     test('secureTrim should remove fields that are not defined in the list of public fields', () => {
-      return expect(secureTrim([{
+      return expect(formatter.secureTrim([{
         id: '1',
         merchant_name: 'pleo',
         amount_in_cents: 100,
@@ -40,8 +43,9 @@ describe('[Packages | Expense-domain | Formatter] secureTrim', () => {
   });
   
 describe('[Packages | Expense-domain | Formatter] formatAll', () => {
+  let formatter = new ExpenseFormatter();
   test('format should return an instance of an expense array that fits the API model, based on the db raw values', () => {
-    return expect(formatAll([{
+    return expect(formatter.formatAll([{
       id: '1',
       merchant_name: 'pleo',
       amount_in_cents: 100,
@@ -78,8 +82,9 @@ describe('[Packages | Expense-domain | Formatter] formatAll', () => {
 });
 
 describe('[Packages | Expense-domain | Formatter] format', () => {
+  let formatter = new ExpenseFormatter();
   test('format should return an instance of users that fits the API model, based on the db raw value', () => {
-    return expect(format({
+    return expect(formatter.format({
       id: '1',
       merchant_name: 'pleo',
       amount_in_cents: 100,

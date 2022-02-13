@@ -1,6 +1,9 @@
-import { Router } from 'express';
-import { router as v1 } from './routes/v1-get-user-expenses';
+import { ExpenseController } from "./ExpenseController";
+import { ExpenseFormatter } from "./ExpenseFormatter";
+import { ExpenseRouter } from './routes/ExpenseRouter';
+import { IExpenseRepository, IExpenseRouter } from "./types";
 
-export const router = Router();
-
-router.use('/v1', v1);
+export function createRouter(repository: IExpenseRepository, version: number = 1): IExpenseRouter {
+    const formatter = new ExpenseFormatter();
+    return new ExpenseRouter(new ExpenseController(formatter, repository), formatter, version);
+}
