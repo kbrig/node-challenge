@@ -63,7 +63,7 @@ Happy hacking 😁!
 
 The solution has been extended, offering now an API allowing to list out paginated, sortable and filterable expenses. There is some level of monitoring now thanks to the module express-status-monitor which can be tuned to our evolving needs.
 
-Most components of this solution have been put into classes in order to follow a more Object-Oriented feel and incorporate Inversion of Control whilst keeping the packages architecture. Doing this allowed easy mocking of our DB access in order to test only our logic and not the DB alongside.
+Most components of this solution have been put into classes in order to follow a more Object-Oriented feel and incorporate Inversion of Control whilst keeping the packages architecture. This is done through Controllers, Routers and Repositories classes. Doing this allowed easy mocking of our DB access in order to test only our logic and not the DB alongside.
 
 Helmet and security.ts offer sufficient security based on the features of the API at this stage.
 
